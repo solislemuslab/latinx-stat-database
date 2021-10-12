@@ -63,6 +63,21 @@ app.get("/members", (req, res) => {
   );
 });
 
+app.get("/record", (req, res) => {
+  const id = req.body.Id;
+  db.query(
+    "SELECT Id, Name, Email, Institution, Position, Website, Twitter, Keywords FROM Members WHERE Id = ?",
+    [id],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
 app.put("/update", (req, res) => {
   const id = req.body.Id;
   const institution = req.body.institution;
