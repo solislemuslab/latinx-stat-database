@@ -1,12 +1,12 @@
-import "../Styles.css";
-import React, { Component } from "react";
+// import "../Styles.css";
+// import React, { Component } from "react";
 
-import Table from "../components/Table";
+// import Table from "../components/Table";
 
-class Home extends Component {
-  render() {
-    return <Table></Table>;
-  }
-}
+// class Home extends Component {
+//   render() {
+//     return <Table></Table>;
+//   }
+// }
 
-export default Home;
+// export default Home;

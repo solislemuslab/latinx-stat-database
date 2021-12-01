@@ -1,0 +1,41 @@
+.navbar {
+    padding: 6px 120px;
+    position: relative;
+    top: 0;
+    width: 100%;
+    background: #eef1f2;
+    align-content: left;
+    font-size: 18px;
+
+    .navbar-content { 
+        text-align: right;
+    
+        display: flex;
+        flex-wrap: wrap;
+        flex-flow: row wrap;
+        align-items: center;
+        justify-content: flex-end;
+
+        .navbar-brand {
+          padding: 0;
+        }
+    
+        .navbar-content-item {
+          padding: 0 10px;
+          width: min-content;
+          transition: transform 300ms;
+    
+          &:hover,
+          &:active,
+          &:focus {
+            transform: scale(1.05);
+          }
+    
+          .navbar-content-link {
+            letter-spacing: 1.5px;
+          }
+        }
+
+    }
+    
+}

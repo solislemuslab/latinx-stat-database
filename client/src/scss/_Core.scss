@@ -1,0 +1,14 @@
+p {
+  margin: 0;
+}
+
+a {
+    color: #2d2d2c;
+
+    &:hover,
+    &:active,
+    &:focus {
+      color: #a7a7a7;
+      text-decoration: none;
+    }
+  }

@@ -1,15 +1,20 @@
 # latinx-stat-database
 
-## Project Setup
-1. Get on a unix instance (Linux, OSX, WSL2 for Windows)
-2. Clone the project
-3. Install [NVM](https://github.com/nvm-sh/nvm) 
-4. Install NPM and Node: `nvm install --lts`
-5. Install Yarn: `npm install -g yarn`
-6. In the server directory run `yarn install`
-7. In the client directory run `yarn install`
-8. Make sure the program has the necessary database access
+## Run the System
+Run the whole with only a single command:
+```bash
+docker-compose up
+```
 
-## Project Execution
-1. In the server directory run `node index.js`
-2. In the client directory run `yarn start`
+Docker will pull the MySQL and Node.js images (if our machine does not have it before).
+
+## Stop the System
+Stopping all the running containers is also simple with a single command:
+```bash
+docker-compose down
+```
+
+If you need to stop and remove all containers, networks, and all images used by any service in <em>docker-compose.yml</em> file, use the command:
+```bash
+docker-compose down --rmi all
+```

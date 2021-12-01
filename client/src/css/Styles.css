@@ -1,0 +1,104 @@
+p {
+  margin: 0;
+}
+
+a {
+  color: #2d2d2c;
+}
+a:hover, a:active, a:focus {
+  color: #a7a7a7;
+  text-decoration: none;
+}
+
+.Content {
+  padding: 40px 120px;
+}
+
+.footer {
+  padding: 12px 120px;
+  background: #eef1f2;
+  bottom: 0;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.navbar {
+  padding: 6px 120px;
+  position: relative;
+  top: 0;
+  width: 100%;
+  background: #eef1f2;
+  -ms-flex-line-pack: left;
+      align-content: left;
+  font-size: 18px;
+}
+.navbar .navbar-content {
+  text-align: right;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+.navbar .navbar-content .navbar-brand {
+  padding: 0;
+}
+.navbar .navbar-content .navbar-content-item {
+  padding: 0 10px;
+  width: -webkit-min-content;
+  width: -moz-min-content;
+  width: min-content;
+  -webkit-transition: -webkit-transform 300ms;
+  transition: -webkit-transform 300ms;
+  transition: transform 300ms;
+  transition: transform 300ms, -webkit-transform 300ms;
+}
+.navbar .navbar-content .navbar-content-item:hover, .navbar .navbar-content .navbar-content-item:active, .navbar .navbar-content .navbar-content-item:focus {
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+}
+.navbar .navbar-content .navbar-content-item .navbar-content-link {
+  letter-spacing: 1.5px;
+}
+
+.Table {
+  width: 100%;
+}
+.Table th,
+.Table td {
+  padding: 15px;
+  text-align: left;
+}
+.Table tr:nth-child(even) {
+  background-color: #d6eeee;
+}
+.Table .table-button {
+  font-size: 30px;
+}
+
+.home {
+  margin: 100px 0;
+}
+.home .home-heading {
+  font-size: 36px;
+  font-weight: 600;
+  letter-spacing: -1px;
+}
+.home .home-text {
+  line-height: 1.75;
+  margin: 20px 0;
+  font-size: 16px;
+}
+.home .home-img {
+  width: 140px;
+}
