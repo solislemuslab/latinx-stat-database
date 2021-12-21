@@ -10,6 +10,14 @@ export default class MembersList extends Component {
     this.state = {};
   }
 
+  onSignIn(googleUser) {
+    var profile = googleUser.getBasicProfile();
+    console.log("ID: " + profile.getId()); // Do not send to your backend! Use an ID token instead.
+    console.log("Name: " + profile.getName());
+    console.log("Image URL: " + profile.getImageUrl());
+    console.log("Email: " + profile.getEmail()); // This is null if the 'email' scope is not present.
+  }
+
   componentDidMount() {}
 
   render() {
@@ -32,6 +40,23 @@ export default class MembersList extends Component {
           <div class="col-sm-4">
             <Button label="View Database" link="/" />
             <Button label="something" link="/" />
+
+            <div
+              id="g_id_onload"
+              data-client_id="1027276051671-fm9ogp59t3lbmqf8a1gbcq9ojv8lrkl8.apps.googleusercontent.com"
+              data-login_uri="http://localhost:8888"
+              data-auto_prompt="false"
+            ></div>
+            <div
+              class="g_id_signin"
+              data-type="standard"
+              data-size="large"
+              data-theme="outline"
+              data-text="sign_in_with"
+              data-shape="rectangular"
+              data-logo_alignment="left"
+            ></div>
+            {/* <div class="g-signin2" data-onsuccess="onSignIn"></div> */}
           </div>
         </div>
       </div>
