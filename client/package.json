@@ -1,5 +1,6 @@
 {
   "name": "react-crud",
+  "proxy":"http://127.0.0.1:8080/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -12,7 +13,8 @@
     "react-dom": "^16.13.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.0",
-    "react-table": "^7.7.0"
+    "react-table": "^7.7.0",
+    "react-google-login": "^5.2.2"
   },
   "scripts": {
     "start": "react-scripts start",

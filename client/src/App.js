@@ -9,6 +9,7 @@ import MembersList from "./components/members-list.component";
 import Table from "./components/table.js";
 import Home from "./components/home.js";
 import Footer from "./components/footer.js";
+//import Google from "./components/google.js";
 import "./Styles.css";
 import "./css/Styles.css";
 
@@ -41,6 +42,11 @@ class App extends Component {
                 Add
               </Link>
             </div>
+            {/* <div className="navbar-content-item">
+              <Link to={"/google"} className="navbar-content-link">
+                Google
+              </Link>
+            </div> */}
           </div>
         </nav>
 
@@ -52,6 +58,7 @@ class App extends Component {
             <Route exact path="/" component={Home} />
             <Route exact path="/members" component={MembersList} />
             <Route exact path="/profile" component={Profile} />
+            {/* <Route exact path="/google" component={Google} /> */}
           </Switch>
         </div>
 

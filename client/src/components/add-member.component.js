@@ -95,7 +95,7 @@ export default class AddMember extends Component {
 
           submitted: true,
         });
-        console.log(response.data);
+        console.log(response.data); // test
       })
       .catch((e) => {
         console.log(e);
