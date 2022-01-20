@@ -21,7 +21,5 @@ module.exports = (app) => {
   // Delete all Members
   router.delete("/", members.deleteAll);
 
-  // router.post("/api/google-login", ) // figure this out
-
   app.use("/api/members", router);
 };

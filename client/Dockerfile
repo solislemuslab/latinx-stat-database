@@ -14,6 +14,9 @@ RUN npm run build
 # Stage 2
 FROM nginx:1.17.0-alpine
 
+# attempt
+COPY nginx.conf /etc/nginx/conf.d/default.conf 
+
 COPY --from=build-stage /client/build /usr/share/nginx/html
 EXPOSE $REACT_DOCKER_PORT
 

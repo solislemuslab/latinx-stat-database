@@ -9,6 +9,7 @@ import MembersList from "./components/members-list.component";
 import Table from "./components/table.js";
 import Home from "./components/home.js";
 import Footer from "./components/footer.js";
+import PageNotFound from "./components/page-not-found.js";
 //import Google from "./components/google.js";
 import "./Styles.css";
 import "./css/Styles.css";
@@ -58,12 +59,12 @@ class App extends Component {
             <Route exact path="/" component={Home} />
             <Route exact path="/members" component={MembersList} />
             <Route exact path="/profile" component={Profile} />
+            <Route exact path="/404" component={PageNotFound} />
             {/* <Route exact path="/google" component={Google} /> */}
           </Switch>
         </div>
 
-        <Footer/>        
-
+        <Footer />
       </div>
     );
   }

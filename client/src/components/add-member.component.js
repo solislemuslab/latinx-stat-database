@@ -84,7 +84,8 @@ export default class AddMember extends Component {
     MemberDataService.create(data)
       .then((response) => {
         this.setState({
-          id: response.data.id,
+          // id: response.data.id,
+          gid: null,
           name: response.data.name,
           email: response.data.email,
           institution: response.data.institution,
@@ -95,7 +96,7 @@ export default class AddMember extends Component {
 
           submitted: true,
         });
-        console.log(response.data); // test
+        // console.log(response.data); // test
       })
       .catch((e) => {
         console.log(e);
@@ -105,6 +106,7 @@ export default class AddMember extends Component {
   newMember() {
     this.setState({
       id: null,
+      gid: null,
       name: "",
       email: "",
       institution: "",

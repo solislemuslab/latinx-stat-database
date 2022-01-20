@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import MemberDataService from "../services/member.service";
+import { Redirect } from "react-router-dom";
 
 export default class Member extends Component {
   constructor(props) {
@@ -14,10 +15,12 @@ export default class Member extends Component {
     this.getMember = this.getMember.bind(this);
     this.updateMember = this.updateMember.bind(this);
     this.deleteMember = this.deleteMember.bind(this);
+    // 108238294779445879355
 
     this.state = {
       currentMember: {
-        id: null,
+        id: null, //props.match.params
+        gid: null,
         name: "",
         email: "",
         institution: "",
@@ -28,6 +31,15 @@ export default class Member extends Component {
       },
       message: "",
     };
+
+    // ben ish
+    const { id } = props.match.params;
+    const goodId = parseInt(id);
+    console.log(id); //test
+    console.log(goodId); //test
+    if (goodId != 0 && !goodId) {
+      return <Redirect to={{ pathname: "/404" }} />;
+    }
   }
 
   componentDidMount() {
@@ -131,6 +143,7 @@ export default class Member extends Component {
         this.setState({
           currentMember: response.data,
         });
+        console.log("response.data:");
         console.log(response.data);
       })
       .catch((e) => {
@@ -140,7 +153,7 @@ export default class Member extends Component {
 
   updatePublished(status) {
     var data = {
-      id: this.state.currentMember.id,
+      id: this.state.currentMember.id, // delete?
       name: this.state.currentMember.name,
       email: this.state.currentMember.email,
       institution: this.state.currentMember.institution,
@@ -166,7 +179,7 @@ export default class Member extends Component {
 
   updateMember() {
     MemberDataService.update(
-      this.state.currentMember.id,
+      this.state.currentMember.id, // delete?
       this.state.currentMember
     )
       .then((response) => {
@@ -196,111 +209,111 @@ export default class Member extends Component {
 
     return (
       <div className="Content">
-        {currentMember ? (
-          <div className="edit-form">
-            <h4>Hello, {currentMember.name}</h4>
-            <form>
-              <div className="form-group">
-                <label htmlFor="name">Name</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="name"
-                  value={currentMember.name}
-                  onChange={this.onChangeName}
-                />
-              </div>
+        {/* {currentMember ? ( */}
+        <div className="edit-form">
+          <h4>Hello, {currentMember.name}</h4>
+          <form>
+            <div className="form-group">
+              <label htmlFor="name">Name</label>
+              <input
+                type="text"
+                className="form-control"
+                id="name"
+                value={currentMember.name}
+                onChange={this.onChangeName}
+              />
+            </div>
 
-              <div className="form-group">
-                <label htmlFor="email">Email</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="email"
-                  value={currentMember.email}
-                  onChange={this.onChangeEmail}
-                />
-              </div>
+            <div className="form-group">
+              <label htmlFor="email">Email</label>
+              <input
+                type="text"
+                className="form-control"
+                id="email"
+                value={currentMember.email}
+                onChange={this.onChangeEmail}
+              />
+            </div>
 
-              <div className="form-group">
-                <label htmlFor="institution">Institution</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="institution"
-                  value={currentMember.institution}
-                  onChange={this.onChangeInstitution}
-                />
-              </div>
+            <div className="form-group">
+              <label htmlFor="institution">Institution</label>
+              <input
+                type="text"
+                className="form-control"
+                id="institution"
+                value={currentMember.institution}
+                onChange={this.onChangeInstitution}
+              />
+            </div>
 
-              <div className="form-group">
-                <label htmlFor="position">Position</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="position"
-                  value={currentMember.position}
-                  onChange={this.onChangePosition}
-                />
-              </div>
+            <div className="form-group">
+              <label htmlFor="position">Position</label>
+              <input
+                type="text"
+                className="form-control"
+                id="position"
+                value={currentMember.position}
+                onChange={this.onChangePosition}
+              />
+            </div>
 
-              <div className="form-group">
-                <label htmlFor="website">Website</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="website"
-                  value={currentMember.website}
-                  onChange={this.onChangeWebsite}
-                />
-              </div>
+            <div className="form-group">
+              <label htmlFor="website">Website</label>
+              <input
+                type="text"
+                className="form-control"
+                id="website"
+                value={currentMember.website}
+                onChange={this.onChangeWebsite}
+              />
+            </div>
 
-              <div className="form-group">
-                <label htmlFor="twitter">Twitter</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="twitter"
-                  value={currentMember.twitter}
-                  onChange={this.onChangeTwitter}
-                />
-              </div>
+            <div className="form-group">
+              <label htmlFor="twitter">Twitter</label>
+              <input
+                type="text"
+                className="form-control"
+                id="twitter"
+                value={currentMember.twitter}
+                onChange={this.onChangeTwitter}
+              />
+            </div>
 
-              <div className="form-group">
-                <label htmlFor="keywords">Keywords</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="keywords"
-                  value={currentMember.keywords}
-                  onChange={this.onChangeKeywords}
-                />
-              </div>
-            </form>
+            <div className="form-group">
+              <label htmlFor="keywords">Keywords</label>
+              <input
+                type="text"
+                className="form-control"
+                id="keywords"
+                value={currentMember.keywords}
+                onChange={this.onChangeKeywords}
+              />
+            </div>
+          </form>
 
-            <button
-              type="submit"
-              className="badge badge-success"
-              onClick={this.updateMember}
-            >
-              Update
-            </button>
+          <button
+            type="submit"
+            className="badge badge-success"
+            onClick={this.updateMember}
+          >
+            Update
+          </button>
 
-            <button
-              className="badge badge-danger mr-2"
-              onClick={this.deleteMember}
-            >
-              Delete
-            </button>
+          <button
+            className="badge badge-danger mr-2"
+            onClick={this.deleteMember}
+          >
+            Delete
+          </button>
 
-            <p>{this.state.message}</p>
-          </div>
-        ) : (
+          <p>{this.state.message}</p>
+        </div>
+        {/* ) : (
           <div>
             <br />
             <p>Please click on a Member...</p>
           </div>
-        )}
+        )} */}
       </div>
     );
   }

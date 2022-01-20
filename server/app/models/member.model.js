@@ -1,5 +1,8 @@
 module.exports = (sequelize, Sequelize) => {
   const Member = sequelize.define("member", {
+    gid: {
+      type: Sequelize.STRING,
+    },
     name: {
       type: Sequelize.STRING,
     },

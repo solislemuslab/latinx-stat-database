@@ -14,6 +14,7 @@ exports.create = (req, res) => {
 
   // Create a Member
   const member = {
+    gid: req.body.gid,
     name: req.body.name,
     email: req.body.email,
     institution: req.body.institution,
@@ -54,7 +55,7 @@ exports.findAll = (req, res) => {
     });
 };
 
-// Find a single Member with an id
+// Find a single Member with a gid // changed all "id" to "gid" //undone
 exports.findOne = (req, res) => {
   const id = req.params.id;
 
@@ -64,7 +65,7 @@ exports.findOne = (req, res) => {
     })
     .catch((err) => {
       res.status(500).send({
-        message: "Error retrieving Member with id=" + id,
+        message: "Error retrieving Member with gid=" + id,
       });
     });
 };
