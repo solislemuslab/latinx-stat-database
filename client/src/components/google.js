@@ -14,7 +14,7 @@ function Google() {
   const saveMember = (gid) => {
     var member = {
       gid: gid,
-      name: " ",
+      name: " ", // get name too?
       email: " ",
       institution: " ",
       position: " ",
@@ -23,16 +23,18 @@ function Google() {
       keywords: " ",
     };
 
-    if (MemberDataService.get(gid) !== null) {
-      // pretty sure this doesn't work as intended
-      // me2
-      console.log("nonunique!!!");
-      console.log(MemberDataService.get(gid));
-    } else {
-      MemberDataService.create(member); // (me)
-      // send user to their profile page
-      // document.location.hash = '/profile/[id]';
-    }
+    MemberDataService.create(member); // (me)
+
+    // if (MemberDataService.get(gid) !== null) {
+    //   // pretty sure this doesn't work as intended
+    //   // me2
+    //   console.log("nonunique!!!");
+    //   console.log(MemberDataService.get(gid));
+    // } else {
+    //   MemberDataService.create(member); // (me)
+    //   // send user to their profile page
+    //   // document.location.hash = '/profile/[id]';
+    // }
   };
 
   const handleFailure = (result) => {
@@ -40,7 +42,7 @@ function Google() {
   };
 
   const handleLogin = async (googleData) => {
-    console.log(googleData); // test
+    console.log(googleData); // debug
     const res = await fetch("http://localhost:6868/api/google-login", {
       method: "POST",
       body: JSON.stringify({
@@ -53,7 +55,7 @@ function Google() {
 
     const data = await res.json();
     setLoginData(data);
-    console.log(data); // test
+    console.log(data); // debug
     localStorage.setItem("loginData", JSON.stringify(data));
     saveMember(googleData.googleId); // me
   };
@@ -67,7 +69,7 @@ function Google() {
     <div>
       {loginData ? (
         <div>
-          <h3>You logged in as {loginData.email}</h3>
+          <p>You're logged in as {loginData.name}</p>
           <button onClick={handleLogout}>Logout</button>
         </div>
       ) : (

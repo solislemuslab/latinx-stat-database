@@ -9,17 +9,17 @@ module.exports = (app) => {
   // Retrieve all Members
   router.get("/", members.findAll);
 
-  // Retrieve a single Member with id
-  router.get("/:id", members.findOne);
+  // Retrieve a single Member with gid
+  router.get("/:gid", members.findOne);
 
-  // Update a Member with id
-  router.put("/:id", members.update);
+  // Update a Member with gid
+  router.put("/:gid", members.update);
 
-  // Delete a Member with id
-  router.delete("/:id", members.delete);
+  // Delete a Member with gid
+  router.delete("/:gid", members.delete);
 
   // Delete all Members
-  router.delete("/", members.deleteAll);
+  // router.delete("/", members.deleteAll);
 
   app.use("/api/members", router);
 };

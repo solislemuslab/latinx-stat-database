@@ -5,20 +5,20 @@ class MemberDataService {
     return http.get("/members");
   }
 
-  get(id) {
-    return http.get(`/members/${id}`);
+  get(gid) {
+    return http.get(`/members/${gid}`);
   }
 
   create(data) {
     return http.post("/members", data);
   }
 
-  update(id, data) {
-    return http.put(`/members/${id}`, data);
+  update(gid, data) {
+    return http.put(`/members/${gid}`, data);
   }
 
-  delete(id) {
-    return http.delete(`/members/${id}`);
+  delete(gid) {
+    return http.delete(`/members/${gid}`);
   }
 
   deleteAll() {

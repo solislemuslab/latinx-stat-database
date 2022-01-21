@@ -1,7 +1,6 @@
 // Table.js
 import React, { Component } from "react";
 import MemberDataService from "../services/member.service";
-import { Link } from "react-router-dom";
 
 export default class MembersList extends Component {
   constructor(props) {
@@ -37,7 +36,7 @@ export default class MembersList extends Component {
         this.setState({
           members: response.data,
         });
-        console.log(response.data);
+        // console.log(response.data); debug
       })
       .catch((e) => {
         console.log(e);
@@ -63,7 +62,7 @@ export default class MembersList extends Component {
         this.setState({
           members: response.data,
         });
-        console.log(response.data);
+        // console.log(response.data); debug
       })
       .catch((e) => {
         console.log(e);
@@ -152,4 +151,3 @@ export default class MembersList extends Component {
     );
   }
 }
-

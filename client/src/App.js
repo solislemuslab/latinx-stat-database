@@ -3,14 +3,14 @@ import { Switch, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
-import AddMember from "./components/add-member.component";
-import Profile from "./components/profile";
-import MembersList from "./components/members-list.component";
-import Table from "./components/table.js";
 import Home from "./components/home.js";
+import Table from "./components/table.js";
+import Profile from "./components/profile";
 import Footer from "./components/footer.js";
 import PageNotFound from "./components/page-not-found.js";
-//import Google from "./components/google.js";
+// import MembersList from "./components/members-list.component";
+// import AddMember from "./components/add-member.component";
+// import Google from "./components/google.js";
 import "./Styles.css";
 import "./css/Styles.css";
 
@@ -20,7 +20,7 @@ class App extends Component {
       <div>
         <nav className="navbar Content">
           <Link to={"/"} className="navbar-brand">
-            LSD
+            Home
           </Link>
           <div className="navbar-content">
             <div className="navbar-content-item">
@@ -33,19 +33,14 @@ class App extends Component {
                 Profile
               </Link>
             </div>
-            <div className="navbar-content-item">
+            {/* <div className="navbar-content-item">
               <Link to={"/members"} className="navbar-content-link">
                 Members
               </Link>
-            </div>
-            <div className="navbar-content-item">
+            </div> */}
+            {/* <div className="navbar-content-item">
               <Link to={"/add"} className="navbar-content-link">
                 Add
-              </Link>
-            </div>
-            {/* <div className="navbar-content-item">
-              <Link to={"/google"} className="navbar-content-link">
-                Google
               </Link>
             </div> */}
           </div>
@@ -53,13 +48,13 @@ class App extends Component {
 
         <div>
           <Switch>
-            <Route exact path="/table" component={Table} />
-            <Route exact path="/add" component={AddMember} />
-            <Route path="/profile/:id" component={Profile} />
             <Route exact path="/" component={Home} />
-            <Route exact path="/members" component={MembersList} />
+            <Route exact path="/table" component={Table} />
             <Route exact path="/profile" component={Profile} />
+            <Route path="/profile/:gid" component={Profile} />
             <Route exact path="/404" component={PageNotFound} />
+            {/* <Route exact path="/add" component={AddMember} /> */}
+            {/* <Route exact path="/members" component={MembersList} /> */}
             {/* <Route exact path="/google" component={Google} /> */}
           </Switch>
         </div>

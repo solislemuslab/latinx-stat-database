@@ -55,27 +55,26 @@ exports.findAll = (req, res) => {
     });
 };
 
-// Find a single Member with a gid // changed all "id" to "gid" //undone
+// Find a single Member with a gid
 exports.findOne = (req, res) => {
-  const id = req.params.id;
-
-  Member.findByPk(id)
+  const gid = req.params.gid;
+  Member.findOne({ where: { gid: gid } })
     .then((data) => {
       res.send(data);
     })
     .catch((err) => {
       res.status(500).send({
-        message: "Error retrieving Member with gid=" + id,
+        message: "Error retrieving Member with gid=" + gid,
       });
     });
 };
 
-// Update a Member by the id in the request
+// Update a Member by the gid in the request
 exports.update = (req, res) => {
-  const id = req.params.id;
+  const gid = req.params.gid;
 
   Member.update(req.body, {
-    where: { id: id },
+    where: { gid: gid },
   })
     .then((num) => {
       if (num == 1) {
@@ -84,23 +83,23 @@ exports.update = (req, res) => {
         });
       } else {
         res.send({
-          message: `Cannot update Member with id=${id}. Maybe Member was not found or req.body is empty!`,
+          message: `Cannot update Member with gid=${gid}. Maybe Member was not found or req.body is empty!`,
         });
       }
     })
     .catch((err) => {
       res.status(500).send({
-        message: "Error updating Member with id=" + id,
+        message: "Error updating Member with gid=" + gid,
       });
     });
 };
 
-// Delete a Member with the specified id in the request
+// Delete a Member with the specified gid in the request
 exports.delete = (req, res) => {
-  const id = req.params.id;
+  const gid = req.params.gid;
 
   Member.destroy({
-    where: { id: id },
+    where: { gid: gid },
   })
     .then((num) => {
       if (num == 1) {
@@ -109,30 +108,30 @@ exports.delete = (req, res) => {
         });
       } else {
         res.send({
-          message: `Cannot delete Member with id=${id}. Maybe Member was not found!`,
+          message: `Cannot delete Member with gid=${gid}. Maybe Member was not found!`,
         });
       }
     })
     .catch((err) => {
       res.status(500).send({
-        message: "Could not delete Member with id=" + id,
+        message: "Could not delete Member with gid=" + gid,
       });
     });
 };
 
-// Delete all Members from the database.
-exports.deleteAll = (req, res) => {
-  Member.destroy({
-    where: {},
-    truncate: false,
-  })
-    .then((nums) => {
-      res.send({ message: `${nums} Members were deleted successfully!` });
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while removing all members.",
-      });
-    });
-};
+// Delete all Members from the database. // DANGEROUS
+// exports.deleteAll = (req, res) => {
+//   Member.destroy({
+//     where: {},
+//     truncate: false,
+//   })
+//     .then((nums) => {
+//       res.send({ message: `${nums} Members were deleted successfully!` });
+//     })
+//     .catch((err) => {
+//       res.status(500).send({
+//         message:
+//           err.message || "Some error occurred while removing all members.",
+//       });
+//     });
+// };

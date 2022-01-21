@@ -15,12 +15,10 @@ export default class Member extends Component {
     this.getMember = this.getMember.bind(this);
     this.updateMember = this.updateMember.bind(this);
     this.deleteMember = this.deleteMember.bind(this);
-    // 108238294779445879355
 
     this.state = {
       currentMember: {
-        id: null, //props.match.params
-        gid: null,
+        gid: "",
         name: "",
         email: "",
         institution: "",
@@ -32,18 +30,20 @@ export default class Member extends Component {
       message: "",
     };
 
-    // ben ish
-    const { id } = props.match.params;
-    const goodId = parseInt(id);
-    console.log(id); //test
-    console.log(goodId); //test
-    if (goodId != 0 && !goodId) {
-      return <Redirect to={{ pathname: "/404" }} />;
-    }
+    // Check whether current user has the credentials to be accessing this exact record
+
+    // // ben ish
+    // const { gid } = props.match.params; // grab gid from url
+    // const goodgid = parseInt(gid);
+    // console.log(gid); //test
+    // console.log(goodgid); //test
+    // if (goodgid != 0 && !goodgid) {
+    //   return <Redirect to={{ pathname: "/404" }} />; // redirect to /404
+    // }
   }
 
   componentDidMount() {
-    this.getMember(this.props.match.params.id);
+    this.getMember(this.props.match.params.gid);
   }
 
   onChangeName(e) {
@@ -137,14 +137,12 @@ export default class Member extends Component {
     });
   }
 
-  getMember(id) {
-    MemberDataService.get(id)
+  getMember(gid) {
+    MemberDataService.get(gid)
       .then((response) => {
         this.setState({
           currentMember: response.data,
         });
-        console.log("response.data:");
-        console.log(response.data);
       })
       .catch((e) => {
         console.log(e);
@@ -153,7 +151,7 @@ export default class Member extends Component {
 
   updatePublished(status) {
     var data = {
-      id: this.state.currentMember.id, // delete?
+      gid: this.state.currentMember.gid, // need id?
       name: this.state.currentMember.name,
       email: this.state.currentMember.email,
       institution: this.state.currentMember.institution,
@@ -163,7 +161,7 @@ export default class Member extends Component {
       keywords: this.state.currentMember.keywords,
     };
 
-    MemberDataService.update(this.state.currentMember.id, data)
+    MemberDataService.update(this.state.currentMember.gid, data)
       .then((response) => {
         this.setState((prevState) => ({
           currentMember: {
@@ -179,13 +177,13 @@ export default class Member extends Component {
 
   updateMember() {
     MemberDataService.update(
-      this.state.currentMember.id, // delete?
+      this.state.currentMember.gid, // need id?
       this.state.currentMember
     )
       .then((response) => {
         console.log(response.data);
         this.setState({
-          message: "The Member was updated successfully!",
+          message: "Your profile has been updated",
         });
       })
       .catch((e) => {
@@ -194,7 +192,7 @@ export default class Member extends Component {
   }
 
   deleteMember() {
-    MemberDataService.delete(this.state.currentMember.id)
+    MemberDataService.delete(this.state.currentMember.gid)
       .then((response) => {
         console.log(response.data);
         this.props.history.push("/Members");
@@ -209,12 +207,12 @@ export default class Member extends Component {
 
     return (
       <div className="Content">
-        {/* {currentMember ? ( */}
         <div className="edit-form">
+          {/* Delete this hello,____? */}
           <h4>Hello, {currentMember.name}</h4>
           <form>
             <div className="form-group">
-              <label htmlFor="name">Name</label>
+              <label htmlFor="name">Name*</label>
               <input
                 type="text"
                 className="form-control"
@@ -225,7 +223,7 @@ export default class Member extends Component {
             </div>
 
             <div className="form-group">
-              <label htmlFor="email">Email</label>
+              <label htmlFor="email">Email*</label>
               <input
                 type="text"
                 className="form-control"
@@ -236,7 +234,7 @@ export default class Member extends Component {
             </div>
 
             <div className="form-group">
-              <label htmlFor="institution">Institution</label>
+              <label htmlFor="institution">Institution*</label>
               <input
                 type="text"
                 className="form-control"
@@ -247,7 +245,7 @@ export default class Member extends Component {
             </div>
 
             <div className="form-group">
-              <label htmlFor="position">Position</label>
+              <label htmlFor="position">Position*</label>
               <input
                 type="text"
                 className="form-control"
@@ -258,7 +256,7 @@ export default class Member extends Component {
             </div>
 
             <div className="form-group">
-              <label htmlFor="website">Website</label>
+              <label htmlFor="website">Website URL (optional)</label>
               <input
                 type="text"
                 className="form-control"
@@ -269,7 +267,7 @@ export default class Member extends Component {
             </div>
 
             <div className="form-group">
-              <label htmlFor="twitter">Twitter</label>
+              <label htmlFor="twitter">Twitter URL (optional)</label>
               <input
                 type="text"
                 className="form-control"
@@ -280,7 +278,7 @@ export default class Member extends Component {
             </div>
 
             <div className="form-group">
-              <label htmlFor="keywords">Keywords</label>
+              <label htmlFor="keywords">Keywords*</label>
               <input
                 type="text"
                 className="form-control"
@@ -308,12 +306,6 @@ export default class Member extends Component {
 
           <p>{this.state.message}</p>
         </div>
-        {/* ) : (
-          <div>
-            <br />
-            <p>Please click on a Member...</p>
-          </div>
-        )} */}
       </div>
     );
   }
