@@ -12,6 +12,7 @@ export default class Member extends Component {
     this.onChangeWebsite = this.onChangeWebsite.bind(this);
     this.onChangeTwitter = this.onChangeTwitter.bind(this);
     this.onChangeKeywords = this.onChangeKeywords.bind(this);
+    this.onChangeVisible = this.onChangeVisible.bind(this);
     this.getMember = this.getMember.bind(this);
     this.updateMember = this.updateMember.bind(this);
     this.deleteMember = this.deleteMember.bind(this);
@@ -26,6 +27,7 @@ export default class Member extends Component {
         website: "",
         twitter: "",
         keywords: "",
+        visible: false,
       },
       message: "",
     };
@@ -137,6 +139,20 @@ export default class Member extends Component {
     });
   }
 
+  // unused, I think
+  onChangeVisible(e) {
+    const visible = e.target.value;
+
+    this.setState(function (prevState) {
+      return {
+        currentMember: {
+          ...prevState.currentMember,
+          visible: visible,
+        },
+      };
+    });
+  }
+
   getMember(gid) {
     MemberDataService.get(gid)
       .then((response) => {
@@ -149,9 +165,10 @@ export default class Member extends Component {
       });
   }
 
+  // delete?
   updatePublished(status) {
     var data = {
-      gid: this.state.currentMember.gid, // need id?
+      gid: this.state.currentMember.gid,
       name: this.state.currentMember.name,
       email: this.state.currentMember.email,
       institution: this.state.currentMember.institution,
@@ -159,6 +176,7 @@ export default class Member extends Component {
       website: this.state.currentMember.website,
       twitter: this.state.currentMember.twitter,
       keywords: this.state.currentMember.keywords,
+      visible: this.state.currentMember.visible,
     };
 
     MemberDataService.update(this.state.currentMember.gid, data)
@@ -175,9 +193,43 @@ export default class Member extends Component {
       });
   }
 
+  // Check to see if all required fields are filled in
+  checkRequired() {
+    const nm = this.state.currentMember.name;
+    const em = this.state.currentMember.email;
+    const it = this.state.currentMember.institution;
+    const ps = this.state.currentMember.position;
+    const kw = this.state.currentMember.keywords;
+
+    if (nm == "" || nm == " ") {
+      return false;
+    } else if (em == "" || em == " ") {
+      return false;
+    } else if (it == "" || it == " ") {
+      return false;
+    } else if (ps == "" || ps == " ") {
+      return false;
+    } else if (kw == "" || kw == " ") {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   updateMember() {
+    const isVisible = this.checkRequired();
+    this.state.currentMember.visible = isVisible;
+    // console.log("checkrequired(): " + this.checkRequired()); // debug
+    // console.log("update visible: " + this.state.currentMember.visible); // debug
+
+    if (!isVisible) {
+      alert(
+        "Some required fields are missing! Your profile will not be visible to others until all required fields are filled."
+      );
+    }
+
     MemberDataService.update(
-      this.state.currentMember.gid, // need id?
+      this.state.currentMember.gid,
       this.state.currentMember
     )
       .then((response) => {
@@ -192,6 +244,7 @@ export default class Member extends Component {
   }
 
   deleteMember() {
+    // Delete this member from the table
     MemberDataService.delete(this.state.currentMember.gid)
       .then((response) => {
         console.log(response.data);
@@ -200,6 +253,8 @@ export default class Member extends Component {
       .catch((e) => {
         console.log(e);
       });
+    // Reirect user back to home page
+    window.location.href = "/";
   }
 
   render() {
@@ -291,17 +346,19 @@ export default class Member extends Component {
 
           <button
             type="submit"
-            className="badge badge-success"
+            // className="badge badge-success"
+            class="btn btn-outline-primary"
             onClick={this.updateMember}
           >
             Update
           </button>
 
           <button
-            className="badge badge-danger mr-2"
+            // className="badge badge-danger mr-2"
+            class="btn btn-outline-danger"
             onClick={this.deleteMember}
           >
-            Delete
+            Delete Profile
           </button>
 
           <p>{this.state.message}</p>

@@ -1,0 +1,46 @@
+.btn {
+  margin: 10px;
+  &.table-btn {
+    margin: 0px;
+  }
+}
+
+.btn-outline-primary {
+  //8dc73f
+  color: #1b75bb;
+  border-color: #1b75bb;
+
+  &:hover {
+    color: #ffffff;
+    background-color: #1b75bb;
+    border-color: #1b75bb;
+  }
+}
+
+.hide {
+  visibility: hidden;
+  .btn {
+    visibility: visible;
+  }
+}
+
+.btn-google {
+  width: 300px;
+  position: relative;
+  left: -50px;
+  top: -15px;
+}
+
+.btn-people {
+  width: 300px;
+}
+
+.btn-logout {
+  width: 300px;
+}
+
+.btn-container-home {
+  position: relative;
+  left: 40px;
+  top: 30px;
+}

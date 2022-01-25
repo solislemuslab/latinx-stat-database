@@ -34,9 +34,15 @@ export default class MembersList extends Component {
             </p>
           </div>
           <div class="col-sm-5">
-            <button link="/">View Database</button>
-            <button link="/">Something?</button>
-            <Google></Google>
+            <div class="btn-container-home">
+              <a
+                class="btn btn-outline-primary btn-lg btn-people"
+                href="/table"
+              >
+                Find People
+              </a>
+              <Google></Google>
+            </div>
           </div>
         </div>
       </div>

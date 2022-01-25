@@ -24,6 +24,9 @@ module.exports = (sequelize, Sequelize) => {
     keywords: {
       type: Sequelize.STRING,
     },
+    visible: {
+      type: Sequelize.BOOLEAN,
+    },
   });
 
   return Member;

@@ -10,6 +10,51 @@ a:hover, a:active, a:focus {
   text-decoration: none;
 }
 
+.btn {
+  margin: 10px;
+}
+.btn.table-btn {
+  margin: 0px;
+}
+
+.btn-outline-primary {
+  color: #1b75bb;
+  border-color: #1b75bb;
+}
+.btn-outline-primary:hover {
+  color: #ffffff;
+  background-color: #1b75bb;
+  border-color: #1b75bb;
+}
+
+.hide {
+  visibility: hidden;
+}
+.hide .btn {
+  visibility: visible;
+}
+
+.btn-google {
+  width: 300px;
+  position: relative;
+  left: -50px;
+  top: -15px;
+}
+
+.btn-people {
+  width: 300px;
+}
+
+.btn-logout {
+  width: 300px;
+}
+
+.btn-container-home {
+  position: relative;
+  left: 40px;
+  top: 30px;
+}
+
 .Content {
   padding: 40px 120px;
 }
@@ -17,9 +62,11 @@ a:hover, a:active, a:focus {
 .footer {
   padding: 12px 120px;
   background: #eef1f2;
-  bottom: 0;
   text-align: center;
   vertical-align: middle;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 
 .navbar {

@@ -41,10 +41,11 @@ exports.create = (req, res) => {
 exports.findAll = (req, res) => {
   const keywords = req.query.keywords;
   var condition = keywords
-    ? { keywords: { [Op.like]: `%${keywords}%` } }
-    : null;
-
-  Member.findAll({ where: condition })
+    ? { keywords: { [Op.like]: `%${keywords}%` }, visible: true }
+    : { visible: true };
+  Member.findAll({
+    where: condition,
+  })
     .then((data) => {
       res.send(data);
     })

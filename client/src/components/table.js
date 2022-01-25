@@ -36,7 +36,7 @@ export default class MembersList extends Component {
         this.setState({
           members: response.data,
         });
-        // console.log(response.data); debug
+        //console.log(response.data); //debug
       })
       .catch((e) => {
         console.log(e);
@@ -62,7 +62,7 @@ export default class MembersList extends Component {
         this.setState({
           members: response.data,
         });
-        // console.log(response.data); debug
+        // console.log(response.data); //debug
       })
       .catch((e) => {
         console.log(e);
@@ -85,7 +85,7 @@ export default class MembersList extends Component {
             />
             <div className="input-group-append">
               <button
-                className="btn btn-outline-secondary"
+                className="btn btn-outline-secondary table-btn"
                 type="button"
                 onClick={this.searchKeyword}
               >
