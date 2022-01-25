@@ -1,15 +1,16 @@
 # latinx-stat-database
 
-## Run the System
-Run the whole with only a single command:
+## Build the System
 ```bash
-docker-compose up
+docker-compose build
 ```
 
-Docker will pull the MySQL and Node.js images (if our machine does not have it before).
+## Run the System
+```bash
+docker-compose up -d
+```
 
 ## Stop the System
-Stopping all the running containers is also simple with a single command:
 ```bash
 docker-compose down
 ```
