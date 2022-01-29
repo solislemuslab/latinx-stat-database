@@ -1,9 +1,13 @@
 import React, { Component } from "react";
 import MemberDataService from "../services/member.service";
-import { Redirect } from "react-router-dom";
 
 export default class Member extends Component {
   constructor(props) {
+    // If not logged in, redirect back home
+    if (!localStorage.getItem("loginData")) {
+      window.location.href = "/";
+    }
+
     super(props);
     this.onChangeName = this.onChangeName.bind(this);
     this.onChangeEmail = this.onChangeEmail.bind(this);
@@ -12,7 +16,6 @@ export default class Member extends Component {
     this.onChangeWebsite = this.onChangeWebsite.bind(this);
     this.onChangeTwitter = this.onChangeTwitter.bind(this);
     this.onChangeKeywords = this.onChangeKeywords.bind(this);
-    this.onChangeVisible = this.onChangeVisible.bind(this);
     this.getMember = this.getMember.bind(this);
     this.updateMember = this.updateMember.bind(this);
     this.deleteMember = this.deleteMember.bind(this);
@@ -31,21 +34,10 @@ export default class Member extends Component {
       },
       message: "",
     };
-
-    // Check whether current user has the credentials to be accessing this exact record
-
-    // // ben ish
-    // const { gid } = props.match.params; // grab gid from url
-    // const goodgid = parseInt(gid);
-    // console.log(gid); //test
-    // console.log(goodgid); //test
-    // if (goodgid != 0 && !goodgid) {
-    //   return <Redirect to={{ pathname: "/404" }} />; // redirect to /404
-    // }
   }
 
   componentDidMount() {
-    this.getMember(this.props.match.params.gid);
+    this.getMember(JSON.parse(localStorage.getItem("loginData")).sub);
   }
 
   onChangeName(e) {
@@ -139,54 +131,12 @@ export default class Member extends Component {
     });
   }
 
-  // unused, I think
-  onChangeVisible(e) {
-    const visible = e.target.value;
-
-    this.setState(function (prevState) {
-      return {
-        currentMember: {
-          ...prevState.currentMember,
-          visible: visible,
-        },
-      };
-    });
-  }
-
   getMember(gid) {
     MemberDataService.get(gid)
       .then((response) => {
         this.setState({
           currentMember: response.data,
         });
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }
-
-  // delete?
-  updatePublished(status) {
-    var data = {
-      gid: this.state.currentMember.gid,
-      name: this.state.currentMember.name,
-      email: this.state.currentMember.email,
-      institution: this.state.currentMember.institution,
-      position: this.state.currentMember.position,
-      website: this.state.currentMember.website,
-      twitter: this.state.currentMember.twitter,
-      keywords: this.state.currentMember.keywords,
-      visible: this.state.currentMember.visible,
-    };
-
-    MemberDataService.update(this.state.currentMember.gid, data)
-      .then((response) => {
-        this.setState((prevState) => ({
-          currentMember: {
-            ...prevState.currentMember,
-          },
-        }));
-        console.log(response.data);
       })
       .catch((e) => {
         console.log(e);
@@ -216,16 +166,50 @@ export default class Member extends Component {
     }
   }
 
+  checkWebsite() {
+    const website = this.state.currentMember.website;
+
+    if (website == "") {
+      return true;
+    } else if (website.startsWith("http")) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  checkTwitter() {
+    const twitter = this.state.currentMember.twitter;
+
+    if (twitter == "") {
+      return true;
+    } else if (twitter.startsWith("https://twitter.com")) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   updateMember() {
-    const isVisible = this.checkRequired();
+    const isVisible = this.checkRequired(); // check all required fields are filled
     this.state.currentMember.visible = isVisible;
-    // console.log("checkrequired(): " + this.checkRequired()); // debug
-    // console.log("update visible: " + this.state.currentMember.visible); // debug
+    const validWebsite = this.checkWebsite(); // check website url is *probably* valid
+    const validTwitter = this.checkTwitter(); // check twitter url is *probably* valid
 
     if (!isVisible) {
       alert(
         "Some required fields are missing! Your profile will not be visible to others until all required fields are filled."
       );
+    }
+
+    if (!validWebsite) {
+      this.state.currentMember.website = "";
+      alert("Website URL must be of the form 'http...'");
+    }
+
+    if (!validTwitter) {
+      this.state.currentMember.twitter = "";
+      alert("Twitter URL must be of the form 'https://twitter.com/...'");
     }
 
     MemberDataService.update(
@@ -261,10 +245,11 @@ export default class Member extends Component {
     const { currentMember } = this.state;
 
     return (
-      <div className="Content">
+      <div className="Content form">
+        <p className="form-hello">
+          Hello, {JSON.parse(localStorage.getItem("loginData")).given_name}
+        </p>
         <div className="edit-form">
-          {/* Delete this hello,____? */}
-          <h4>Hello, {currentMember.name}</h4>
           <form>
             <div className="form-group">
               <label htmlFor="name">Name*</label>
@@ -344,22 +329,24 @@ export default class Member extends Component {
             </div>
           </form>
 
-          <button
-            type="submit"
-            // className="badge badge-success"
-            class="btn btn-outline-primary"
-            onClick={this.updateMember}
-          >
-            Update
-          </button>
+          <div className="btn-container-profile">
+            <button
+              type="submit"
+              // className="badge badge-success"
+              class="btn btn-outline-primary"
+              onClick={this.updateMember}
+            >
+              Update Profile
+            </button>
 
-          <button
-            // className="badge badge-danger mr-2"
-            class="btn btn-outline-danger"
-            onClick={this.deleteMember}
-          >
-            Delete Profile
-          </button>
+            <button
+              // className="badge badge-danger mr-2"
+              class="btn btn-outline-danger"
+              onClick={this.deleteMember}
+            >
+              Delete Profile
+            </button>
+          </div>
 
           <p>{this.state.message}</p>
         </div>

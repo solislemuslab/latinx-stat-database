@@ -45,6 +45,7 @@ exports.findAll = (req, res) => {
     : { visible: true };
   Member.findAll({
     where: condition,
+    order: ["name"],
   })
     .then((data) => {
       res.send(data);

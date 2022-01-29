@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Switch, Route, Link } from "react-router-dom";
+import { Switch, Route, Link, Redirect } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./css/Styles.css";
 import Home from "./components/home.js";
@@ -12,14 +12,16 @@ class App extends Component {
   render() {
     return (
       <div>
-        <nav className="navbar Content">
-          <Link to={"/"} className="navbar-brand">
-            Home
-          </Link>
+        <nav className="navbar">
+          <div className="navbar-brand">
+            <Link to={"/"} className="navbar-content-link">
+              Home
+            </Link>
+          </div>
           <div className="navbar-content">
             <div className="navbar-content-item">
               <Link to={"/table"} className="navbar-content-link">
-                Table
+                People
               </Link>
             </div>
             <div className="navbar-content-item">
@@ -35,8 +37,10 @@ class App extends Component {
             <Route exact path="/" component={Home} />
             <Route exact path="/table" component={Table} />
             <Route exact path="/profile" component={Profile} />
-            <Route path="/profile/:gid" component={Profile} />
-            <Route exact path="/404" component={PageNotFound} />
+            <Route path="/404" component={PageNotFound} />
+            <Route path="*">
+              <Redirect to="/404" />
+            </Route>
           </Switch>
         </div>
 

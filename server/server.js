@@ -42,10 +42,11 @@ app.post("/api/google-login", async (req, res) => {
     idToken: token,
     audience: process.env.CLIENT_ID,
   });
-  const { name, email, picture } = ticket.getPayload();
-  upsert(users, { name, email, picture }); // update and insert
+  console.log("getPayload: " + ticket.getPayload()); //debug
+  const { sub, name, email, picture, given_name } = ticket.getPayload();
+  upsert(users, { sub, name, email, picture, given_name }); // update and insert
   res.status(201);
-  res.json({ name, email, picture });
+  res.json({ sub, name, email, picture, given_name });
 });
 
 // simple route

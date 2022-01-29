@@ -2,6 +2,14 @@
   margin: 10px;
   &.table-btn {
     margin: 0px;
+    color: #1b75bb;
+    border-color: #1b75bb;
+
+    &:hover {
+      color: #ffffff;
+      background-color: #1b75bb;
+      border-color: #1b75bb;
+    }
   }
 }
 
@@ -17,6 +25,12 @@
   }
 }
 
+.btn-outline-warning {
+  &:hover {
+    color: #ffffff;
+  }
+}
+
 .hide {
   visibility: hidden;
   .btn {
@@ -28,7 +42,7 @@
   width: 300px;
   position: relative;
   left: -50px;
-  top: -15px;
+  top: -20px;
 }
 
 .btn-people {
@@ -37,10 +51,21 @@
 
 .btn-logout {
   width: 300px;
+  position: relative;
+  top: -10px;
 }
 
 .btn-container-home {
   position: relative;
   left: 40px;
   top: 30px;
+}
+
+.btn-container-profile {
+  text-align: center;
+  position: relative;
+  top: 15px;
+  .btn {
+    width: 128px;
+  }
 }

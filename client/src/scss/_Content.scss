@@ -1,3 +1,15 @@
 .Content {
-    padding: 40px 120px;
+  padding: 40px 120px;
+}
+
+@media only screen and (max-width: 750px) {
+  .Content {
+    padding: 40px 60px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .Content {
+    padding: 20px 30px;
+  }
 }

@@ -8,7 +8,7 @@
   }
 
   tr:nth-child(even) {
-    background-color: #d6eeee;
+    background-color: #d2e8f9;
   }
 
   .table-button {
@@ -16,5 +16,16 @@
     //margin: 0 10px;
     //font-size: 100px;
     font-size: 30px;
+
+    &:hover {
+      color: #1b75bb;
+      text-decoration: none;
+    }
+  }
+}
+
+.input-group {
+  .form-control {
+    border-color: #1b75bb;
   }
 }
