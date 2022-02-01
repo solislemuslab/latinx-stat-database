@@ -223,6 +223,11 @@ a:hover {
 .home .home-img {
   width: 140px;
 }
+.home .wid-logo {
+  height: 90px;
+  position: relative;
+  top: -5px;
+}
 
 .page-not-found.Content {
   padding: 0px;

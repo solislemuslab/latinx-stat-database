@@ -1,20 +1,25 @@
 .home {
+  margin: 100px 0;
 
-    margin: 100px 0;
+  .home-heading {
+    font-size: 36px;
+    font-weight: 600;
+    letter-spacing: -1px;
+  }
 
-    .home-heading {
-        font-size: 36px;
-        font-weight: 600;
-        letter-spacing: -1px;
-    }
+  .home-text {
+    line-height: 1.75;
+    margin: 20px 0;
+    font-size: 16px;
+  }
 
-    .home-text {
-        line-height: 1.75;
-        margin: 20px 0;
-        font-size: 16px;
-    }
+  .home-img {
+    width: 140px;
+  }
 
-    .home-img {
-        width: 140px;
-    }
+  .wid-logo {
+    height: 90px;
+    position: relative;
+    top: -5px;
+  }
 }
