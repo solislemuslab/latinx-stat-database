@@ -1,0 +1,28 @@
+.footer {
+  padding: 12px 30px;
+  background: #eef1f2;
+
+  text-align: center;
+  vertical-align: middle;
+
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.spacer {
+  margin-top: 48px;
+  bottom: 0;
+}
+
+// @media only screen and (max-width: 750px) {
+//   .footer {
+//     padding: 12px 60px;
+//   }
+// }
+
+// @media only screen and (max-width: 500px) {
+//   .footer {
+//     padding: 12px 30px;
+//   }
+// }

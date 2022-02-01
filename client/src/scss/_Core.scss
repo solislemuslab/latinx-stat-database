@@ -1,0 +1,12 @@
+p {
+  margin: 0;
+}
+
+a {
+  color: #2d2d2c;
+
+  &:hover {
+    color: #a7a7a7;
+    text-decoration: none;
+  }
+}
