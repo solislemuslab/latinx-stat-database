@@ -21,3 +21,6 @@ COPY --from=build-stage /client/build /usr/share/nginx/html
 EXPOSE $REACT_DOCKER_PORT
 
 CMD nginx -g 'daemon off;'
+
+# # Set the user to use when running this image
+# USER node
