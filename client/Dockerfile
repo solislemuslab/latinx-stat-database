@@ -12,7 +12,7 @@ ENV REACT_APP_API_BASE_URL=$REACT_APP_API_BASE_URL
 RUN npm run build
 
 # Stage 2
-FROM nginx:1.17.0-alpine
+FROM nginx:1.20.2
 
 # attempt
 COPY nginx.conf /etc/nginx/conf.d/default.conf 
