@@ -1,17 +1,24 @@
 import React from "react";
+import Obfuscate from 'react-obfuscate';
 
 const Footer = () => (
-  <div>
-    <div className="spacer"></div>
-    <div className="footer">
-      <p>
-        Developed by the{" "}
-        <a href="https://solislemuslab.github.io/" target="blank">
-          Solis-Lemus Lab
-        </a>
-      </p>
-    </div>
+  <div className="footer-container">
+    <div className="divider"/>
+    <footer className="footer">
+      <div>
+        <p>
+          Developed by the{" "}
+          <a href="https://solislemuslab.github.io/" target="blank">
+            Solís-Lemus Lab
+          </a>
+        </p>
+      </div>
+      <div>
+        Contact Us: <Obfuscate email="widlisd@gmail.com"/>
+      </div>
+    </footer>
   </div>
 );
 
-export default Footer;
+export default Footer
+

@@ -3,15 +3,16 @@ import { Switch, Route, Link, Redirect } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./css/Styles.css";
 import Home from "./components/home.js";
-import Table from "./components/table.js";
+import People from "./components/people.js";
 import Profile from "./components/profile";
+import Admin from "./components/admin";
 import Footer from "./components/footer.js";
 import PageNotFound from "./components/page-not-found.js";
 
 class App extends Component {
   render() {
     return (
-      <div>
+      <div className="container">
         <nav className="navbar">
           <div className="navbar-brand">
             <Link to={"/"} className="navbar-content-link">
@@ -20,7 +21,7 @@ class App extends Component {
           </div>
           <div className="navbar-content">
             <div className="navbar-content-item">
-              <Link to={"/table"} className="navbar-content-link">
+              <Link to={"/people"} className="navbar-content-link">
                 People
               </Link>
             </div>
@@ -31,12 +32,13 @@ class App extends Component {
             </div>
           </div>
         </nav>
-
+        <div className="divider"/>
         <div>
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route exact path="/table" component={Table} />
+            <Route exact path="/people" component={People} />
             <Route exact path="/profile" component={Profile} />
+            <Route exact path="/admin" component={Admin} />
             <Route path="/404" component={PageNotFound} />
             <Route path="*">
               <Redirect to="/404" />

@@ -10,6 +10,32 @@ a:hover {
   text-decoration: none;
 }
 
+h3 {
+  font-size: 32px;
+  font-weight: 400;
+  margin: 0;
+  padding-top: 32px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  min-height: 100vh;
+}
+
+.divider {
+  border-top: 2px solid #eef1f2;
+  margin: 16px 0;
+}
+
 .btn {
   margin: 10px;
 }
@@ -78,32 +104,28 @@ a:hover {
 }
 
 .Content {
-  padding: 40px 120px;
+  padding: 32px 0px;
 }
 
-@media only screen and (max-width: 750px) {
-  .Content {
-    padding: 40px 60px;
-  }
-}
-@media only screen and (max-width: 500px) {
-  .Content {
-    padding: 20px 30px;
-  }
-}
 .footer {
-  padding: 12px 30px;
-  background: #eef1f2;
-  text-align: center;
-  vertical-align: middle;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column, column, row;
+          flex-direction: column, column, row;
+  margin-bottom: 16px;
+  font-weight: 500;
 }
 
-.spacer {
-  margin-top: 48px;
-  bottom: 0;
+.footer-container {
+  margin-top: auto;
 }
 
 .form .form-hello {
@@ -118,14 +140,15 @@ a:hover {
 }
 
 .navbar {
-  padding: 10px 120px;
   position: relative;
   top: 0;
   width: 100%;
-  background: #eef1f2;
   -ms-flex-line-pack: left;
       align-content: left;
-  font-size: 18px;
+  font-size: 20px;
+  font-weight: 500;
+  margin-top: 8px;
+  margin-bottom: -8px;
 }
 .navbar .navbar-brand {
   padding: 0;
@@ -174,18 +197,9 @@ a:hover {
   letter-spacing: 1.5px;
 }
 
-@media only screen and (max-width: 750px) {
-  .navbar {
-    padding: 10px 60px;
-  }
-}
-@media only screen and (max-width: 500px) {
-  .navbar {
-    padding: 10px 30px;
-  }
-}
 .Table {
   width: 100%;
+  padding-bottom: 32px;
 }
 .Table th,
 .Table td {
@@ -208,7 +222,7 @@ a:hover {
 }
 
 .home {
-  margin: 100px 0;
+  margin: 32px 0;
 }
 .home .home-heading {
   font-size: 36px;

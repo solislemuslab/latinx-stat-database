@@ -18,8 +18,5 @@ module.exports = (app) => {
   // Delete a Member with gid
   router.delete("/:gid", members.delete);
 
-  // Delete all Members
-  // router.delete("/", members.deleteAll);
-
   app.use("/api/members", router);
 };

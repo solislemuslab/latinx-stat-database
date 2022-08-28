@@ -7,6 +7,10 @@ export default class Member extends Component {
     if (!localStorage.getItem("loginData")) {
       window.location.href = "/";
     }
+    // If user is admin, redirect to admin page
+    if (JSON.parse(localStorage.getItem("loginData")).sub == "112570682828656133985") {
+      window.location.href = "/admin";
+    }
 
     super(props);
     this.onChangeName = this.onChangeName.bind(this);
@@ -30,7 +34,8 @@ export default class Member extends Component {
         website: "",
         twitter: "",
         keywords: "",
-        visible: false,
+        validated: false,
+        approved: false,
       },
       message: "",
     };
@@ -189,14 +194,15 @@ export default class Member extends Component {
       return false;
     }
   }
-
+  
   updateMember() {
-    const isVisible = this.checkRequired(); // check all required fields are filled
-    this.state.currentMember.visible = isVisible;
+    const isValidated = this.checkRequired(); // check all required fields are filled
+    this.state.currentMember.validated = isValidated;
     const validWebsite = this.checkWebsite(); // check website url is *probably* valid
     const validTwitter = this.checkTwitter(); // check twitter url is *probably* valid
+    const isApproved = this.state.currentMember.approved; // check if member is approved
 
-    if (!isVisible) {
+    if (!isValidated) {
       alert(
         "Some required fields are missing! Your profile will not be visible to others until all required fields are filled."
       );
@@ -217,10 +223,15 @@ export default class Member extends Component {
       this.state.currentMember
     )
       .then((response) => {
-        console.log(response.data);
-        this.setState({
-          message: "Your profile has been updated",
-        });
+        if (isApproved) {
+          this.setState({
+            message: "Your profile has been updated.",
+          });
+        } else {
+          this.setState({
+            message: "Your profile has been updated. It will be publicly visible once approved.",
+          });
+        }
       })
       .catch((e) => {
         console.log(e);
@@ -231,14 +242,13 @@ export default class Member extends Component {
     // Delete this member from the table
     MemberDataService.delete(this.state.currentMember.gid)
       .then((response) => {
-        console.log(response.data);
-        this.props.history.push("/Members");
+        // Redirect user back to home page
+        localStorage.removeItem("loginData");
+        window.location.href = "/";
       })
       .catch((e) => {
         console.log(e);
       });
-    // Reirect user back to home page
-    window.location.href = "/";
   }
 
   render() {

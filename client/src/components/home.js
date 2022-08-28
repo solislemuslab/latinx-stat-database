@@ -50,7 +50,7 @@ export default class Home extends Component {
             <div class="btn-container-home">
               <a
                 class="btn btn-outline-primary btn-lg btn-people"
-                href="/table"
+                href="/people"
               >
                 Find People
               </a>

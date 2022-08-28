@@ -1,11 +1,12 @@
 .navbar {
-  padding: 10px 120px;
   position: relative;
   top: 0;
   width: 100%;
-  background: #eef1f2;
   align-content: left;
-  font-size: 18px;
+  font-size: 20px;
+  font-weight: 500;
+  margin-top: 8px;
+  margin-bottom: -8px;
 
   .navbar-brand {
     padding: 0;
@@ -42,17 +43,5 @@
         letter-spacing: 1.5px;
       }
     }
-  }
-}
-
-@media only screen and (max-width: 750px) {
-  .navbar {
-    padding: 10px 60px;
-  }
-}
-
-@media only screen and (max-width: 500px) {
-  .navbar {
-    padding: 10px 30px;
   }
 }
