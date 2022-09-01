@@ -24,7 +24,10 @@ module.exports = (sequelize, Sequelize) => {
     keywords: {
       type: Sequelize.STRING,
     },
-    visible: {
+    validated: {
+      type: Sequelize.BOOLEAN,
+    },
+    approved: {
       type: Sequelize.BOOLEAN,
     },
   });

@@ -2,6 +2,7 @@ import GoogleLogin from "react-google-login";
 import { useState } from "react";
 import React from "react";
 import MemberDataService from "../services/member.service";
+import MailDataService from "../services/mail.service";
 import { useHistory } from "react-router";
 
 function Google() {
@@ -11,7 +12,6 @@ function Google() {
       : null
   );
 
-  // Save member to table
   const saveMember = (gid, name) => {
     var member = {
       gid: gid,
@@ -22,15 +22,14 @@ function Google() {
       website: "",
       twitter: "",
       keywords: "",
-      visible: false,
+      validated: false,
+      approved: false,
     };
 
     return new Promise((resolve) => {
-      // Create record only if such a record does not already exist for given gid
       MemberDataService.get(gid)
         .then((response) => {
           if (response.data == "") {
-            console.log("create!");
             resolve(MemberDataService.create(member));
           } else {
             resolve(response.data);
@@ -49,7 +48,6 @@ function Google() {
   const history = useHistory();
 
   const handleLogin = async (googleData) => {
-    // console.log("googleData: " + googleData); // debug
     const res = await fetch("http://localhost:6868/api/google-login", {
       method: "POST",
       body: JSON.stringify({
@@ -62,10 +60,22 @@ function Google() {
 
     const data = await res.json();
     setLoginData(data);
-    // console.log(data); // debug
 
     localStorage.setItem("loginData", JSON.stringify(data));
+
+    if (googleData.googleId == "112570682828656133985") {
+      return;
+    }
+
     await saveMember(googleData.googleId, googleData.profileObj.name);
+
+    MailDataService.sendEmail()
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   const loginRedirect = async (googleData) => {

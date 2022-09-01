@@ -22,6 +22,8 @@ exports.create = (req, res) => {
     website: req.body.website,
     twitter: req.body.twitter,
     keywords: req.body.keywords,
+    validated: req.body.validated,
+    approved: req.body.approved,
   };
 
   // Save Member in the database
@@ -37,12 +39,19 @@ exports.create = (req, res) => {
     });
 };
 
-// Retrieve all Members from the database.
+// Retrieve all Members from the database who are visible (approved and validated).
 exports.findAll = (req, res) => {
   const keywords = req.query.keywords;
-  var condition = keywords
-    ? { keywords: { [Op.like]: `%${keywords}%` }, visible: true }
-    : { visible: true };
+  const approved = req.query.approved;
+
+  var condition = 
+    keywords != undefined
+    ? { keywords: { [Op.like]: `%${keywords}%` }, validated: true, approved: true }
+    : approved == true
+    ? { approved: true }
+    : approved == false
+    ? { approved: false }
+    : { validated: true, approved: true };
   Member.findAll({
     where: condition,
     order: ["name"],
@@ -120,20 +129,3 @@ exports.delete = (req, res) => {
       });
     });
 };
-
-// Delete all Members from the database. // DANGEROUS
-// exports.deleteAll = (req, res) => {
-//   Member.destroy({
-//     where: {},
-//     truncate: false,
-//   })
-//     .then((nums) => {
-//       res.send({ message: `${nums} Members were deleted successfully!` });
-//     })
-//     .catch((err) => {
-//       res.status(500).send({
-//         message:
-//           err.message || "Some error occurred while removing all members.",
-//       });
-//     });
-// };

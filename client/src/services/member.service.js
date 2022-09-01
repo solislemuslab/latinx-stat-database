@@ -1,7 +1,7 @@
 import http from "../http-common";
 
 class MemberDataService {
-  getAll() {
+  getAllVisible() {
     return http.get("/members");
   }
 
@@ -21,12 +21,16 @@ class MemberDataService {
     return http.delete(`/members/${gid}`);
   }
 
-  deleteAll() {
-    return http.delete(`/members`);
-  }
-
   findByKeyword(keyword) {
     return http.get(`/members?keywords=${keyword}`);
+  }
+
+  getNotApproved() {
+    return http.get(`/members?approved=${0}`);
+  }
+
+  getApproved() {
+    return http.get(`/members?approved=${1}`);
   }
 }
 

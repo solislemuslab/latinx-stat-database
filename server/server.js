@@ -55,6 +55,7 @@ app.get("/", (req, res) => {
 });
 
 require("./app/routes/member.routes")(app);
+require("./app/routes/mail.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.NODE_DOCKER_PORT || 8080;
