@@ -1,9 +1,9 @@
-import GoogleLogin from "react-google-login";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import React from "react";
 import MemberDataService from "../services/member.service";
 import MailDataService from "../services/mail.service";
 import { useHistory } from "react-router";
+import jwt_decode from "jwt-decode";
 
 function Google() {
   const [loginData, setLoginData] = useState(
@@ -11,6 +11,17 @@ function Google() {
       ? JSON.parse(localStorage.getItem("loginData"))
       : null
   );
+
+  window.onload = function () {
+    window.google.accounts.id.initialize({
+      client_id: "1027276051671-fm9ogp59t3lbmqf8a1gbcq9ojv8lrkl8.apps.googleusercontent.com",
+      callback: loginRedirect,
+    });
+    window.google.accounts.id.renderButton(
+      document.getElementById("google-signin-button"),
+      { theme: "outline", size: "large" }
+    );
+  };
 
   const saveMember = (gid, name) => {
     var member = {
@@ -31,6 +42,14 @@ function Google() {
         .then((response) => {
           if (response.data == "") {
             resolve(MemberDataService.create(member));
+            // alert of new member
+            MailDataService.sendEmail()
+            .then((response) => {
+              console.log(response.data);
+            })
+            .catch((e) => {
+              console.log(e);
+            });
           } else {
             resolve(response.data);
           }
@@ -47,11 +66,15 @@ function Google() {
 
   const history = useHistory();
 
-  const handleLogin = async (googleData) => {
+  const handleLogin = async (response) => {
+    var credential = jwt_decode(response.credential);
+    var gid = credential.sub;
+    var name = credential.name;
+
     const res = await fetch("http://localhost:6868/api/google-login", {
       method: "POST",
       body: JSON.stringify({
-        token: googleData.tokenId,
+        token: response.credential,
       }),
       headers: {
         "Content-Type": "application/json",
@@ -63,23 +86,16 @@ function Google() {
 
     localStorage.setItem("loginData", JSON.stringify(data));
 
-    if (googleData.googleId == "112570682828656133985") {
+    if (gid == "112570682828656133985") {
       return;
     }
 
-    await saveMember(googleData.googleId, googleData.profileObj.name);
-
-    MailDataService.sendEmail()
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    await saveMember(gid, name);
   };
 
-  const loginRedirect = async (googleData) => {
-    await handleLogin(googleData); // wait for login backend calls to complete before redirecting
+  const loginRedirect = async (response) => {
+    console.log("loginRedirect open"); // DEBUG
+    await handleLogin(response); // wait for login backend calls to complete before redirecting
     window.location.href = "/profile"; // send to profile page
   };
 
@@ -101,18 +117,7 @@ function Google() {
           </button>
         </div>
       ) : (
-        <GoogleLogin
-          className="hide"
-          clientId={process.env.GOOGLE_CLIENT_ID}
-          buttonText="Log in with Google"
-          onSuccess={loginRedirect}
-          onFailure={handleFailure}
-          cookiePolicy={"single_host_origin"}
-        >
-          <button class="btn btn-outline-primary btn-google">
-            Log in with Google
-          </button>
-        </GoogleLogin>
+         <div id="google-signin-button" className="btn btn-google"></div>
       )}
     </div>
   );
