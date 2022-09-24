@@ -42,9 +42,9 @@ app.post("/api/google-login", async (req, res) => {
     idToken: token,
     audience: process.env.CLIENT_ID,
   });
-  console.log("getPayload: " + ticket.getPayload()); //debug
+  // console.log("getPayload: " + ticket.getPayload()); //debug
   const { sub, name, email, picture, given_name } = ticket.getPayload();
-  upsert(users, { sub, name, email, picture, given_name }); // update and insert
+  upsert(users, { sub, name, email, picture, given_name });
   res.status(201);
   res.json({ sub, name, email, picture, given_name });
 });
