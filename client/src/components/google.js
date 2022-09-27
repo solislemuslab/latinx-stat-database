@@ -4,6 +4,7 @@ import MemberDataService from "../services/member.service";
 import MailDataService from "../services/mail.service";
 import { useHistory } from "react-router";
 import jwt_decode from "jwt-decode";
+require("dotenv").config();
 
 function Google() {
   const [loginData, setLoginData] = useState(
@@ -71,7 +72,7 @@ function Google() {
     var gid = credential.sub;
     var name = credential.name;
 
-    const res = await fetch("http://localhost:6868/api/google-login", {
+    const res = await fetch(process.env.REACT_APP_API_BASE_URL + "/google-login", {
       method: "POST",
       body: JSON.stringify({
         token: response.credential,
@@ -94,7 +95,6 @@ function Google() {
   };
 
   const loginRedirect = async (response) => {
-    console.log("loginRedirect open"); // DEBUG
     await handleLogin(response); // wait for login backend calls to complete before redirecting
     window.location.href = "/profile"; // send to profile page
   };
