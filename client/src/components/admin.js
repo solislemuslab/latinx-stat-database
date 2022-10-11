@@ -129,6 +129,7 @@ export default class Member extends Component {
                 <td>{member.name}</td>
                 <td>{member.email}</td>
                 <td>{member.institution}</td>
+                <td>{member.keywords}</td>
                 <td>
                   <button
                     class="btn btn-outline-warning"
@@ -164,6 +165,7 @@ export default class Member extends Component {
               <td>{member.name}</td>
               <td>{member.email}</td>
               <td>{member.institution}</td>
+              <td>{member.keywords}</td>
               <td>
                 <button
                   class="btn btn-outline-warning"
