@@ -39,11 +39,12 @@ export default class Home extends Component {
               Welcome to the Latinx in Statistics database hosted at the
               Wisconsin Institute for Discovery (WID) in coordination with the
               American Statistical Association (ASA). This database contains
-              information of Latinx statisticians and data scientists. If you
-              identify as Latinx, please add yourself to the database by logging
-              in with Google and creating your profile. If you are organizing a
-              statistical conference, please use this database to include a more
-              diverse representation of speakers.
+              information of Latinx statisticians and data scientists. If you 
+              identify as Latinx working in Statistics or Data Science, please 
+              add yourself to the database by logging in with Google and creating
+              your profile. If you are organizing a statistical conference,
+              please use this database to include a more diverse representation
+              of speakers.
             </p>
           </div>
           <div class="col-sm-5">
