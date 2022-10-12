@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import MemberDataService from "../services/member.service";
+import MailDataService from "../services/mail.service";
 
 export default class Member extends Component {
   constructor(props) {
@@ -37,7 +38,6 @@ export default class Member extends Component {
         validated: false,
         approved: false,
       },
-      message: "",
     };
   }
 
@@ -200,7 +200,6 @@ export default class Member extends Component {
     this.state.currentMember.validated = isValidated;
     const validWebsite = this.checkWebsite(); // check website url is *probably* valid
     const validTwitter = this.checkTwitter(); // check twitter url is *probably* valid
-    const isApproved = this.state.currentMember.approved; // check if member is approved
 
     if (!isValidated) {
       alert(
@@ -218,24 +217,28 @@ export default class Member extends Component {
       alert("Twitter URL must be of the form 'https://twitter.com/...'");
     }
 
+    this.state.currentMember.approved = false;
+
     MemberDataService.update(
       this.state.currentMember.gid,
       this.state.currentMember
     )
       .then((response) => {
-        if (isApproved) {
-          this.setState({
-            message: "Your profile has been updated.",
-          });
-        } else {
-          this.setState({
-            message: "Your profile has been updated. It will be publicly visible once approved.",
-          });
-        }
+        alert("Your profile has been updated. It will be publicly visible once approved.");
+        window.location.href = "/profile";
       })
       .catch((e) => {
         console.log(e);
       });
+
+    // alert of updated member
+    MailDataService.sendEmail()
+    .then((response) => {
+      console.log(response.data);
+    })
+    .catch((e) => {
+      console.log(e);
+    });
   }
 
   deleteMember() {
@@ -342,7 +345,6 @@ export default class Member extends Component {
           <div className="btn-container-profile">
             <button
               type="submit"
-              // className="badge badge-success"
               class="btn btn-outline-primary"
               onClick={this.updateMember}
             >
@@ -350,15 +352,12 @@ export default class Member extends Component {
             </button>
 
             <button
-              // className="badge badge-danger mr-2"
               class="btn btn-outline-danger"
               onClick={this.deleteMember}
             >
               Delete Profile
             </button>
           </div>
-
-          <p>{this.state.message}</p>
         </div>
       </div>
     );

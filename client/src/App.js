@@ -6,6 +6,7 @@ import Home from "./components/home.js";
 import People from "./components/people.js";
 import Profile from "./components/profile";
 import Admin from "./components/admin";
+import FAQ from "./components/faq";
 import Footer from "./components/footer.js";
 import PageNotFound from "./components/page-not-found.js";
 
@@ -30,6 +31,11 @@ class App extends Component {
                 Profile
               </Link>
             </div>
+            <div className="navbar-content-item">
+              <Link to={"/faq"} className="navbar-content-link">
+                FAQ
+              </Link>
+            </div>
           </div>
         </nav>
         <div className="divider"/>
@@ -39,6 +45,7 @@ class App extends Component {
             <Route exact path="/people" component={People} />
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/admin" component={Admin} />
+            <Route exact path="/faq" component={FAQ} />
             <Route path="/404" component={PageNotFound} />
             <Route path="*">
               <Redirect to="/404" />
