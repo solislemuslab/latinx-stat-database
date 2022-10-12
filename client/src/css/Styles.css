@@ -17,6 +17,13 @@ h3 {
   padding-top: 32px;
 }
 
+h4 {
+  font-weight: 400;
+  margin: 0;
+  padding-top: 32px;
+  padding-bottom: 12px;
+}
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
